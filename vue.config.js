@@ -1,6 +1,7 @@
 const path=require('path')
 const SkeletonWebpackPlugin=require('vue-skeleton-webpack-plugin')
 module.exports = {
+    outputDir:'../vueApicloud_APP',
     lintOnSave: process.env.NODE_ENV !== 'production',
     publicPath: process.env.NODE_ENV === 'production' ?
         './' :
@@ -9,7 +10,14 @@ module.exports = {
     productionSourceMap:false,
     devServer: {
         port: 8081,
-        proxy: {
+        contentBase: path.join(__dirname, "mock"),
+    compress: true,
+    overlay: {
+      warnings: false,
+      errors: true
+    },
+    before: require("./mock")
+        /*proxy: {
             '/': {
                 target: '',
                 changeOrigin: true,
@@ -18,7 +26,7 @@ module.exports = {
                     '^/': '/'
                 }
             }
-        }
+        }*/
     },
     css:{
         //css拆分ExtractTextPlugin插件

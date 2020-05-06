@@ -1,3 +1,3 @@
-module.exports={
-    isApp:false
-}
+module.exports = {
+	isApp: false
+};

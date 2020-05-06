@@ -1,15 +1,14 @@
-# zerosky-oa
+# vue-apiCloud
 
 基於vue+APICloud
 
 # develop
 在瀏覽器中調試
 修改src/constant/global.js isApp值
-修改src/service/fetch.js fetch函數url
 
 # build
 在APICloud studio中真機調試
-打包前修改isApp值和fetch路徑
+打包前修改isApp
 script文件夾加入api.js並加入index引用
 
 ## Project setup

@@ -1,6 +1,5 @@
 export default {
-    method: 'POST',
-    host: '',
-    apiPrefix: '',
-    timeout: 30000
-}
+	method: 'POST',
+	apiPrefix: '',
+	timeout: 30000
+};
