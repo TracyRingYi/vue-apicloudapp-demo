@@ -1,3 +1,3 @@
 module.exports = {
-	isApp: false
-};
+	isApp: process.env.NODE_ENV !== 'production' ? false : true
+}

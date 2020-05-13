@@ -1,1 +1,1 @@
-export const SYSTEMTYPE='SYSTEMTYPE'
+export const SYSTEMTYPE = 'SYSTEMTYPE'
