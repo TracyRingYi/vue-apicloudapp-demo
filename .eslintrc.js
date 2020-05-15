@@ -2,7 +2,8 @@ module.exports = {
     "root": true,
     "env": {
         "browser": true,
-        "es6": true
+        "es6": true,
+        "node": true
     },
     "extends": [
         "eslint:recommended",
@@ -11,7 +12,9 @@ module.exports = {
     ],
     "globals": {
         "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
+        "SharedArrayBuffer": "readonly",
+        //apiCloud全局变量
+        "api":true
     },
     "parserOptions": {
         "ecmaVersion": 2018,

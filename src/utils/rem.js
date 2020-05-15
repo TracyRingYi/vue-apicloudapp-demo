@@ -1,12 +1,12 @@
-const baseSize=32;
+const baseSize = 32
 
-function setRem(){
-    const scale=document.documentElement.clientWidth/375;
-    document.documentElement.style.fontSize=(baseSize*Math.min(scale,2))+'px';
+function setRem() {
+	const scale = document.documentElement.clientWidth / 375
+	document.documentElement.style.fontSize = baseSize * Math.min(scale, 2) + 'px'
 }
 
-setRem();
+setRem()
 
-window.onresize=()=>{
-    setRem();
+window.onresize = () => {
+	setRem()
 }

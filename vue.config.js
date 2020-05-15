@@ -1,39 +1,39 @@
-const path=require('path')
-const SkeletonWebpackPlugin=require('vue-skeleton-webpack-plugin')
+const path = require('path')
+//const SkeletonWebpackPlugin=require('vue-skeleton-webpack-plugin')
 module.exports = {
-    outputDir:'../vueApicloud_APP',
-    lintOnSave: process.env.NODE_ENV !== 'production',
-    publicPath: process.env.NODE_ENV === 'production' ?
-        './' :
-        '/',
-    assetsDir: 'static',
-    productionSourceMap:false,
-    devServer: {
-        port: 8081,
-        contentBase: path.join(__dirname, "mock"),
-    compress: true,
-    overlay: {
-      warnings: false,
-      errors: true
-    },
-    before: require("./mock")
-        /*proxy: {
-            '/': {
-                target: '',
-                changeOrigin: true,
-                ws: false,
-                pathRewrite: {
-                    '^/': '/'
-                }
-            }
-        }*/
-    },
-    css:{
-        //css拆分ExtractTextPlugin插件
-        extract:true
-    },
-    /**寫完骨架屏修改 */
-    /*configureWebpack:config=>{
+	outputDir: '../vueApicloud_APP',
+	lintOnSave: process.env.NODE_ENV !== 'production',
+	publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
+	assetsDir: 'static',
+	productionSourceMap: false,
+	devServer: {
+		proxy: {
+			'/': {
+				target: process.env.VUE_APP_HOST,
+				changeOrigin: true,
+				ws: false
+			}
+		},
+		port: 8081,
+		contentBase: path.join(__dirname, 'mock'),
+		compress: true,
+		overlay: {
+			warnings: false,
+			errors: true
+		},
+		before: require('./mock')
+	},
+	css: {
+		//css拆分ExtractTextPlugin插件
+		extract: true,
+		loaderOptions: {
+			sass: {
+				prependData: `@import "@/assets/style/variables.scss"`
+			}
+		}
+	}
+	/**寫完骨架屏修改 */
+	/*configureWebpack:config=>{
         config.plugins.push(new SkeletonWebpackPlugin({
             webpackConfig:{
                 entry:{
