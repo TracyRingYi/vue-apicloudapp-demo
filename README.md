@@ -7,4 +7,3 @@
 
 # build
 在APICloud studio中真機調試
-script文件夾加入api.js並加入index引用
