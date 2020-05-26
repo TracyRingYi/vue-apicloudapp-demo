@@ -11,7 +11,7 @@ import ApiConfig from './config'
 class BaseFetch {
 	constructor() {
 		this.instance = axios.create({
-			baseURL: process.env.VUE_APP_HOST,
+			//baseURL: process.env.VUE_APP_HOST,
 			withCredentials: process.env.NODE_ENV === 'production' ? false : true,
 			timeout: ApiConfig.timeout
 		})
@@ -28,22 +28,28 @@ class BaseFetch {
 		}
 	}
 	get(url, params = {}) {
-		return this.instance.get(url, params)
+		return this.instance.get(url, { params })
 	}
-	post(url, params = {}) {
-		return this.instance.post(url, {
+	post(url, data = undefined, config = {}) {
+		return this.instance.post(url, data, {
 			...this.dataMethodDefaults,
-			...params
+			...config
 		})
 	}
-	put(url, params = {}) {
-		return this.instance.put(url, {
+	put(url, data = undefined, config = {}) {
+		return this.instance.put(url, data, {
 			...this.dataMethodDefaults,
-			...params
+			...config
 		})
 	}
 	delete(url, params = {}) {
-		return this.instance.delete(url, params)
+		return this.instance.delete(url, { params })
+	}
+	patch(url, data = undefined, config = {}) {
+		return this.instance.patch(url, data, {
+			...this.dataMethodDefaults,
+			...config
+		})
 	}
 }
 
@@ -95,7 +101,6 @@ const getErrorMsgByStatusCode = (code) => {
  * @param {Object} err 错误信息
  */
 const handleError = (err) => {
-	console.log(err.message)
 	if (!err.response) {
 		err.message = '网络连接不可用'
 	} else {

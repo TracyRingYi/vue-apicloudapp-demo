@@ -1,7 +1,6 @@
 <template>
-	<div class="page_coutainer forgetpwd_coutainer">
+	<div class="page_coutainer forgetpwd">
 		<div class="page_mid">
-			<logo-box />
 			<div class="input-box">
 				<van-field
 					:value="user.phonenumber"
@@ -50,15 +49,13 @@
 
 <script>
 import { Field, Toast, Button } from 'vant'
-import LogoBox from '@/components/display/logoBox'
-import LoginFetch from '@/survice/getData/loginFetch'
+import LoginFetch from '@/survice/getData/login'
 export default {
 	name: 'forget-pwd',
 	components: {
 		[Field.name]: Field,
 		[Toast.name]: Toast,
-		[Button.name]: Button,
-		LogoBox
+		[Button.name]: Button
 	},
 	data() {
 		return {
@@ -169,7 +166,7 @@ export default {
 </script>
 
 <style lang="scss">
-.forgetpwd_coutainer {
+.forgetpwd {
 	.page_mid {
 		width: 100%;
 		height: 520px;

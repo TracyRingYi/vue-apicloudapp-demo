@@ -1,13 +1,16 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
-
-import { SYSTEMTYPE } from './store/mutations.type'
+import { STARTAPP } from './actions.type'
+import { SYSTEMTYPE } from './mutations.type'
+import Login from './modules/LoginModule'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
 	strict: process.env.NODE_ENV !== 'production',
-	modules: {},
+	modules: {
+		login: Login
+	},
 	state: {
 		isIOS: null
 	},
@@ -24,13 +27,37 @@ export default new Vuex.Store({
 			state.isIOS = payload
 		}
 	},
-	actions: {},
+	actions: {
+		[STARTAPP]({ state, commit, dispatch }) {
+			let user = state.login
+			//commit('LOGIN_FAIL');
+			if (user) {
+				let now = new Date().getTime()
+				//三天內自動登錄
+				let days = 60 * 60 * 24 * 1000 * 3
+				let validityTruly = false
+				if (user.validity) {
+					let validityDate = new Date(user.validity).getTime()
+					validityTruly = validityDate + days > now ? true : false
+				}
+				setTimeout(() => {
+					if (user.isLogin && validityTruly) {
+						//auto login
+						dispatch('LOGIN_AUTO')
+					} else {
+						commit('LOGIN_FAIL')
+					}
+				}, 1000)
+			}
+		}
+	},
 	plugins: [
 		createPersistedState({
 			storage: window.localStorage,
 			reducer(val) {
 				return {
-					isIOS: val.isIOS
+					isIOS: val.isIOS,
+					login: val.login
 				}
 			}
 		})

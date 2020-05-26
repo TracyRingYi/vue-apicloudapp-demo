@@ -1,2 +1,4 @@
-const Mock = require("mockjs");
-module.exports = function (app) {};
+const loginAction = require('./action/login')
+module.exports = function (app) {
+	loginAction(app)
+}

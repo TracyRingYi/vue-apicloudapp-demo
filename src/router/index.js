@@ -3,9 +3,8 @@ import Router from 'vue-router'
 import business from './business'
 import pages from './pages'
 import guards from './guard'
-import StartApp from './views/pages/startApp'
+import StartApp from '@/views/pages/startApp'
 Vue.use(Router)
-
 const routes = [
 	{
 		path: '/startapp',
@@ -13,7 +12,8 @@ const routes = [
 		component: StartApp
 	},
 	...business,
-	...pages
+	...pages,
+	{ path: '', redirect: 'startapp' }
 ]
 
 const router = new Router({

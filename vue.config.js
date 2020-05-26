@@ -6,14 +6,28 @@ module.exports = {
 	publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
 	assetsDir: 'static',
 	productionSourceMap: false,
+	chainWebpack: (config) => {
+		//自动化导入variables.scss变量文件
+		const oneOfsMap = config.module.rule('scss').oneOfs.store
+		oneOfsMap.forEach((item) => {
+			item
+				.use('sass-resources-loader')
+				.loader('sass-resources-loader')
+				.options({
+					// 要公用的scss的路径
+					resources: ['./src/assets/style/variables.scss']
+				})
+				.end()
+		})
+	},
 	devServer: {
-		proxy: {
+		/*proxy: {
 			'/': {
 				target: process.env.VUE_APP_HOST,
 				changeOrigin: true,
 				ws: false
 			}
-		},
+		},*/
 		port: 8081,
 		contentBase: path.join(__dirname, 'mock'),
 		compress: true,
@@ -25,11 +39,14 @@ module.exports = {
 	},
 	css: {
 		//css拆分ExtractTextPlugin插件
-		extract: true,
-		loaderOptions: {
-			sass: {
-				prependData: `@import "@/assets/style/variables.scss"`
-			}
+		extract: true
+	},
+	configureWebpack: {
+		entry: {
+			api: './api/api.js'
+		},
+		output: {
+			filename: 'static/js/[name].js'
 		}
 	}
 	/**寫完骨架屏修改 */

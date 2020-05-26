@@ -1,5 +1,5 @@
 <template>
-	<div class="page-countainer"></div>
+	<div class="start-app"></div>
 </template>
 
 <script>
@@ -13,7 +13,7 @@ export default {
 	watch: {
 		user: {
 			handler(newval) {
-				let topath = newval.isLogin ? 'mainpage/home' : 'login'
+				let topath = newval.isLogin ? 'main' : 'login'
 				this.$router.replace(topath)
 			},
 			deep: true
@@ -25,9 +25,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.page-countainer {
-	background-image: url('../assets/img/bg.png');
+<style lang="scss">
+.start-app {
 	background-color: $theme-color;
 	background-attachment: fixed;
 	background-repeat: no-repeat;
