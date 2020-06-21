@@ -89,6 +89,9 @@ export default {
 			deep: true
 		}
 	},
+	mounted() {
+		console.log(this.global)
+	},
 	methods: {
 		handleLoginFail(msg) {
 			let message = msg ? msg : '登录失败'

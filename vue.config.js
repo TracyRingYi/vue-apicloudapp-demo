@@ -31,6 +31,15 @@ module.exports = {
 				prependData: `@import "@/assets/style/variables.scss"`
 			}
 		}
+	},
+	configureWebpack: () => {
+		if (process.env.NODE_ENV === 'production') {
+			return {
+				externals: {
+					api: 'api' // apiCloud配置
+				}
+			}
+		}
 	}
 	/**寫完骨架屏修改 */
 	/*configureWebpack:config=>{

@@ -14,7 +14,8 @@ module.exports = {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly",
         //apiCloud全局变量
-        "api":true
+        "api": true,
+        "$api": true
     },
     "parserOptions": {
         "ecmaVersion": 2018,
@@ -28,8 +29,8 @@ module.exports = {
     "rules": {
         "prettier/prettier": "error",
         'generator-star-spacing': 'off',
-        'no-console':'off',
+        'no-console': 'off',
         'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-        'no-restricted-modules':'off'
+        'no-restricted-modules': 'off'
     }
 };
