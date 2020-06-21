@@ -6,7 +6,7 @@
 			replace
 			:icon="tabitem.icon"
 			:to="tabitem.name"
-			active-color="#07c160"
+			:active-color="activecolor"
 			>{{ tabitem.text }}</van-tabbar-item
 		>
 	</van-tabbar>
@@ -25,10 +25,6 @@ export default {
 			type: Array,
 			required: true
 		},
-		active: {
-			type: Number,
-			required: true
-		},
 		activecolor: {
 			type: String,
 			default: '#1989fa'
@@ -45,7 +41,6 @@ export default {
 	methods: {
 		getActive() {
 			let tabbar = this.tabbar
-			console.log(this.$route)
 			let thename = this.$route.name
 			this.activeVal = 0
 			for (let i = 0; i < tabbar.length; i++) {

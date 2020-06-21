@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 import global from './constant/global'
 import '@/utils/rem'
-import '@assets/style/index'
+import '@/assets/style/index.scss'
 import '@/init/index.js'
 
 Vue.config.productionTip = false

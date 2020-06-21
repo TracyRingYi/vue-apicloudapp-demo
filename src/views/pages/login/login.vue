@@ -1,10 +1,10 @@
 <template>
-	<div class="page_coutainer login_coutainer">
+	<div class="page_coutainer login">
 		<div class="page_mid">
-			<logo-box />
-			<div class="input-box">
+			<div class="text-title text-center">vue+apiCloud</div>
+			<form class="input-box">
 				<van-field
-					:value="user.username"
+					:value="username"
 					@input="bindUserName"
 					left-icon="user-o"
 					clearable
@@ -17,15 +17,13 @@
 					type="password"
 					placeholder="请输入密码"
 				/>
-			</div>
+			</form>
 			<button
 				class="btn-default btn-center"
 				@click="bindlogin"
 				:disabled="noinput"
 				:class="btnClass"
-			>
-				登录
-			</button>
+			>登录</button>
 			<section class="section_box flex-between text-default">
 				<p @click="bindForgetPwd">忘记密码</p>
 				<div>|</div>
@@ -44,18 +42,17 @@
 </template>
 
 <script>
-import LogoBox from '@/components/display/logoBox'
 import { Field, Toast } from 'vant'
 export default {
 	name: 'login',
 	components: {
 		[Field.name]: Field,
-		[Toast.name]: Toast,
-		LogoBox
+		[Toast.name]: Toast
 	},
 	data() {
 		return {
 			logining: false,
+			username: '',
 			password: ''
 		}
 	},
@@ -64,13 +61,10 @@ export default {
 			return this.$store.state.login
 		},
 		noinput() {
-			let username = this.user.username
-			let password = this.password
-			return !(username && password)
+			return !(this.username && this.password)
 		},
 		btnClass() {
-			let type = this.noinput ? 'btn-disable' : 'btn-primary'
-			return type
+			return this.noinput ? 'btn-disable' : 'btn-primary'
 		}
 	},
 	watch: {
@@ -81,7 +75,8 @@ export default {
 				Toast.clear()
 				if (newval.isLogin && newval.message == 0) {
 					//跳转
-					this.$router.replace('/mainpage')
+					console.log('jump')
+					this.$router.replace('/main')
 				} else {
 					this.handleLoginFail(newval.message)
 				}
@@ -90,7 +85,9 @@ export default {
 		}
 	},
 	mounted() {
-		console.log(this.global)
+		if (this.user.username) {
+			this.username = this.user.username
+		}
 	},
 	methods: {
 		handleLoginFail(msg) {
@@ -108,19 +105,22 @@ export default {
 				message: '登录中...'
 			})
 			this.logining = true
-			this.$store.dispatch('LOGIN', { password: this.password })
+			this.$store.dispatch('LOGIN', {
+				username: this.username,
+				password: this.password
+			})
 		},
 		bindUserName(e) {
-			this.user.username = e
+			this.username = e
 		},
 		bindPassword(e) {
 			this.password = e
 		},
 		bindForgetPwd() {
-			this.$router.push('forgetpwd')
+			this.$router.push('/forgetpwd')
 		},
 		bindSignUp() {
-			this.$router.push('signup')
+			this.$router.push('/signup')
 		},
 		bindLoginWithWechat() {
 			console.log('wechat')
@@ -133,15 +133,18 @@ export default {
 </script>
 
 <style lang="scss">
-.login_coutainer {
-	.page_coutainer {
+.login {
+	&.page_coutainer {
 		align-items: center;
 	}
 	.page_mid {
 		width: 100%;
-		height: 520px;
+		height: 420px;
 		display: flex;
 		flex-direction: column;
+	}
+	.text-title {
+		margin-bottom: 50px;
 	}
 	.input-box {
 		width: 300px;
@@ -163,10 +166,10 @@ export default {
 		background-size: cover;
 	}
 	.login-wechat {
-		background-image: url('../../assets/img/logo_wechat.png');
+		background-image: url('../../../assets/img/logo_wechat.png');
 	}
 	.login-alipay {
-		background-image: url('../../assets/img/logo_alipay.png');
+		background-image: url('../../../assets/img/logo_alipay.png');
 	}
 }
 </style>

@@ -23,14 +23,14 @@ export default {
 					text: '首页'
 				},
 				{
-					name: 'trip',
+					name: 'product',
 					icon: 'bag-o',
-					text: '行程'
+					text: '产品'
 				},
 				{
-					name: 'survice',
+					name: 'order',
 					icon: 'like-o',
-					text: '酒店服务'
+					text: '订单'
 				},
 				{
 					name: 'user',

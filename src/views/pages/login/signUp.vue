@@ -1,7 +1,6 @@
 <template>
 	<div class="page_coutainer signup_coutainer">
 		<div class="page_mid">
-			<logo-box />
 			<div class="input-box">
 				<van-field
 					:value="user.phonenumber"
@@ -65,15 +64,13 @@
 
 <script>
 import { Field, Toast, Button } from 'vant'
-import LogoBox from '@/components/display/logoBox'
-import LoginFetch from '@/survice/getData/loginFetch'
+import LoginFetch from '@/survice/getData/login'
 export default {
 	name: 'sign-up',
 	components: {
 		[Field.name]: Field,
 		[Toast.name]: Toast,
-		[Button.name]: Button,
-		LogoBox
+		[Button.name]: Button
 	},
 	data() {
 		return {
